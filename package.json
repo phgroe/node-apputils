@@ -1,0 +1,11 @@
+{
+	"name": "@phgroe/apputils",
+	"version": "0.0.3",
+	"license": "WTF",
+	"private": true,
+	"main": "dist/index.js",
+	"devDependencies": {
+		"@types/node": "^9.6.2",
+		"typescript": "^2.8.0"
+	}
+}
