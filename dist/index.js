@@ -6,4 +6,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __export(require("./environment"));
 __export(require("./filesystem"));
 __export(require("./inspect"));
+__export(require("./stringify-clone"));
 //# sourceMappingURL=index.js.map
