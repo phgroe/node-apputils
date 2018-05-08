@@ -1,13 +1,17 @@
 import * as fs from 'fs';
-import * as path from 'path';
 
-//import { NotFoundError } from 'app/util/errors';
-import { isTest } from './environment';
+import {
+	dirname,
+	join,
+	sep as pathSeparator,
+} from 'path';
+
+import { promisify } from 'util';
 
 // The filesystem root of the whole project
 export const rootPath : string = ( () => {
-	const pathTokens = path.dirname (module.parent.parent.filename)
-		.split (path.sep).filter (s => s.length > 0);
+	const pathTokens = dirname (module.parent.parent.filename)
+		.split (pathSeparator).filter (s => s.length > 0);
 
 	let index = 1;
 	let found = false;
@@ -16,58 +20,25 @@ export const rootPath : string = ( () => {
 	while (!found && index < pathTokens.length)
 	{
 		paths = [ '/', ...(pathTokens.slice (0, index ++)) ];
-		found = fs.existsSync (path.join (...paths, 'node_modules'));
+		found = fs.existsSync (join (...paths, 'node_modules'));
 	}
 
-	return path.join (...paths);
+	return join (...paths);
 })();
 
-/*findRoot((isTest && process.env.CWD !== undefined)
-	? process.env.CWD
-	: path.dirname(require.main.filename)); */
+export type StatsWithPath = fs.Stats & { path : string };
 
-/*
-export function loadResource(relativePath : string) : Promise <Buffer> {
-	return new Promise((resolve, reject) => {
-		const fullPath : string = path.join(rootPath, relativePath);
+export async function scanDir (scanpath : string) : Promise <StatsWithPath[]> {
+	const readdir = promisify (fs.readdir);
+	const stat = promisify (fs.stat);
 
-		fs.open(fullPath, 'r', (errOpen) => {
-			if (errOpen) {
-				if (errOpen.code === 'ENOENT') {
-					return reject(new NotFoundError(`${fullPath} does not exist`));
-				}
+	const joiner = (name : string) => join (scanpath, name);
 
-				return reject(errOpen);
-			}
+	const resolver = (path : string) => (
+		stat(path).then((st : fs.Stats) => Object.assign(st, { path }))
+	);
 
-			fs.readFile(fullPath, (errRead, data : Buffer) => {
-				if (errRead) {
-					return reject(errRead);
-				}
+	const files : string[] = await readdir (scanpath, 'utf8');
 
-				return resolve(data);
-			});
-		});
-	});
+	return Promise.all (files.map (joiner).map (resolver));
 }
-
-export function loadJSON(relativePath : string) : Promise <any> {
-	return loadResource(relativePath)
-		.then(buffer => JSON5.parse(buffer.toString()));
-}
-
-export function scanDir(folderName : string) : Promise <string[]> {
-	return new Promise((resolve, reject) => {
-		fs.readdir(folderName, (err, files : string[]) => {
-			return err ? reject(err) : resolve(files);
-		});
-	});
-}
-
-export function watchFile(relativePath : string, callback : any) : Promise <fs.FSWatcher> {
-	const fullPath : string = path.join(rootPath, relativePath);
-	return new Promise((resolve) => {
-		return resolve(fs.watch(fullPath, {}, callback));
-	});
-}
-*/
