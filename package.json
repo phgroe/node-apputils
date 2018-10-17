@@ -3,13 +3,20 @@
 	"version": "0.0.5",
 	"license": "WTF",
 	"private": true,
-
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
 	"typings": "dist/index.d.ts",
-
+	"bundleDependencies": false,
+	"dependencies": {
+		"bluebird": "~3.5.0",
+		"convict": "~4.0.0",
+		"mongodb": "~3.1.0"
+	},
 	"devDependencies": {
-		"@types/node": "^9.6.2",
-		"typescript": "^2.8.0"
+		"@types/bluebird": "~3.5.0",
+		"@types/mongodb": "~3.1.0",
+		"@types/convict": "~4.2.0",
+		"@types/node": "~9.6.0",
+		"typescript": "~2.8.0"
 	}
 }

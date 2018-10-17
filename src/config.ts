@@ -7,6 +7,7 @@ import { rootPath } from '.';
 
 type FinalizeCallback <S> = (schema : Config <S>) => void;
 
+
 export function finalizeConfig <S> (
 	schema : Config <S>,
 	callback? : FinalizeCallback <S>
