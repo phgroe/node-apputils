@@ -8,7 +8,7 @@
 	"typings": "dist/index.d.ts",
 	"bundleDependencies": false,
 	"dependencies": {
-		"bluebird": "~3.5.0",
+		"bluebird": "~3.5.3",
 		"convict": "~4.0.0",
 		"mongodb": "~3.1.10"
 	},
