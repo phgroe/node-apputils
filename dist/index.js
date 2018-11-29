@@ -10,5 +10,4 @@ __export(require("./environment"));
 __export(require("./filesystem"));
 __export(require("./inspect"));
 __export(require("./stringify-clone"));
-__export(require("./db/mongodb"));
 //# sourceMappingURL=index.js.map
