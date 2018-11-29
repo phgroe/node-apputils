@@ -8,4 +8,3 @@ export * from './filesystem';
 export * from './inspect';
 export * from './stringify-clone';
 
-export * from './db/mongodb';
