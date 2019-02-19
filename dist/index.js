@@ -7,7 +7,8 @@ const Bluebird = require("bluebird");
 global.Promise = Bluebird;
 __export(require("./config"));
 __export(require("./environment"));
-__export(require("./filesystem"));
+__export(require("./filesystem/rootPath"));
+__export(require("./filesystem/scanDir"));
 __export(require("./inspect"));
 __export(require("./stringify-clone"));
 //# sourceMappingURL=index.js.map

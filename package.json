@@ -1,12 +1,14 @@
 {
 	"name": "@phgroe/apputils",
-	"version": "0.0.6",
-	"license": "WTF",
-	"private": true,
+	"version": "0.0.7",
+	"license": "GPL-3.0",
+	"private": false,
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
 	"typings": "dist/index.d.ts",
-	"bundleDependencies": false,
+	"scripts": {
+		"build": "node_modules/.bin/tsc --pretty --diagnostics"
+	},
 	"dependencies": {
 		"bluebird": "~3.5.3",
 		"convict": "~4.4.1"
@@ -16,5 +18,13 @@
 		"@types/convict": "~4.2.0",
 		"@types/node": "^10.12.18",
 		"typescript": "^3.2.0"
+	},
+	"greenkeeper": {
+		"ignore": [
+			"@types/bluebird",
+			"@types/convict",
+			"@types/node",
+			"typescript"
+		]
 	}
 }
