@@ -11,18 +11,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const fs = require("fs");
 const path_1 = require("path");
 const util_1 = require("util");
-exports.rootPath = (() => {
-    const pathTokens = path_1.dirname(module.parent.parent.filename)
-        .split(path_1.sep).filter(s => s.length > 0);
-    let index = 1;
-    let found = false;
-    let paths = [];
-    while (!found && index < pathTokens.length) {
-        paths = ['/', ...(pathTokens.slice(0, index++))];
-        found = fs.existsSync(path_1.join(...paths, 'node_modules'));
-    }
-    return path_1.join(...paths);
-})();
 function scanDir(scanpath) {
     return __awaiter(this, void 0, void 0, function* () {
         const readdir = util_1.promisify(fs.readdir);
@@ -34,4 +22,4 @@ function scanDir(scanpath) {
     });
 }
 exports.scanDir = scanDir;
-//# sourceMappingURL=filesystem.js.map
+//# sourceMappingURL=scanDir.js.map
