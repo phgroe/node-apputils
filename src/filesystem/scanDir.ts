@@ -1,30 +1,7 @@
 import * as fs from 'fs';
 
-import {
-	dirname,
-	join,
-	sep as pathSeparator,
-} from 'path';
-
+import { join } from 'path';
 import { promisify } from 'util';
-
-// The filesystem root of the whole project
-export const rootPath : string = ( () => {
-	const pathTokens = dirname (module.parent.parent.filename)
-		.split (pathSeparator).filter (s => s.length > 0);
-
-	let index = 1;
-	let found = false;
-	let paths : string[] = [];
-
-	while (!found && index < pathTokens.length)
-	{
-		paths = [ '/', ...(pathTokens.slice (0, index ++)) ];
-		found = fs.existsSync (join (...paths, 'node_modules'));
-	}
-
-	return join (...paths);
-})();
 
 export type StatsWithPath = fs.Stats & { path : string };
 
